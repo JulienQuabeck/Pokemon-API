@@ -18,7 +18,7 @@ let likedPokemon= [];
 
 // Übersetzung Name in versch. Sprachen
 // responsive: PokemonSingleCard(Chart)
-//fav. einfügen
+
 async function init(){
     startLoading();
     screenwidth();
@@ -31,11 +31,11 @@ async function init(){
     finishedLoading();// evtl. wieder löschen
 }
 
-function startLoading(){ //evtl. wieder löschen
+function startLoading(){
     startLoadingAgain();
     document.getElementById('loadingScreen').innerHTML=`
     <div>
-        <img src="./img/logo.png">
+        <img class="loadingScreenPokeball" src="./img/logo.png">
     </div>`;
 }
 
@@ -43,7 +43,7 @@ function startLoadingAgain(){
     document.getElementById('loadingScreen').classList.remove('d-none');
 }
 
-function finishedLoading(){//evtl. wieder löschen
+function finishedLoading(){
     document.getElementById('loadingScreen').classList.add('d-none');
 }
 
@@ -78,7 +78,7 @@ function setLanguage(i){
     initAfterChangingLanguage();
 }
 
-async function loadDataInDifferentLanguages(responseAsJson){//muss noch bearbeitet werden
+async function loadDataInDifferentLanguages(responseAsJson){
 //     //https://pokeapi.co/api/v2/pokemon/1/forms/0/url
 //     //names -> Namen in verschiedenen Sprachen
     let newUrl = responseAsJson['forms'][0]['url'];

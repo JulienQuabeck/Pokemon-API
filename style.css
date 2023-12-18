@@ -507,6 +507,18 @@ header{
     min-width:300px;
 }
 
+@media(max-width:1000px){
+    .loadingScreenPokeball{
+        width:600px;
+    }
+}
+
+@media(max-width:900px){
+    .loadingScreenPokeball{
+        width:500px;
+    }
+}
+
 @media(max-width:850px){
     .logo{
         width:60px;
@@ -529,6 +541,10 @@ header{
 @media(max-width:800px){
     .singlePokemonCardImage{
         width:150px;
+    }
+
+    .loadingScreenPokeball{
+        width:400px;
     }
 }
 
@@ -555,6 +571,10 @@ header{
 
     #id, #weight, #height{
         font-size:16px;
+    }
+
+    .loadingScreenPokeball{
+        width:300px;
     }
 }
 
@@ -602,10 +622,18 @@ header{
         width:80%;
         margin: 10% 10% 20% 10%;
     }
+
+    .loadingScreenPokeball{
+        width:300px;
+    }
 }
 
 @media(max-width:420px){
     .errorWindow{
         width:300px;
+    }
+
+    .loadingScreenPokeball{
+        width:200px;
     }
 }
