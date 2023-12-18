@@ -13,7 +13,7 @@ let BurgerMenushown;
 let errorDetected = false;
 let likedPokemon= [];
 let searchInBurgerMenu = false;
-let activSearch;
+let activSearch =false;
 //"https://pokeapi.co/api/v2/pokemon/?offset=40&limit=20"
 
 //Fehler Zeile 375 angeblich kann das Bild nicht geladen werden... wird aber trotzdem angezeigt
@@ -69,6 +69,7 @@ function showLanguage(){
 }
 
 function setLanguage(i){
+    searchInBurgerMenu = false;
     if (i == 0){
         currentLanguage = 'de';
     }else if(i == 1){
@@ -661,6 +662,7 @@ function searchBurgerMenu(){
 }
 
 function BurgerMenuSearch(){
+    searchInBurgerMenu = true;
     let search = document.getElementById('BurgerMenusearch').value;
     let Pokemonfound = false;
     search = search.toLowerCase();
@@ -742,6 +744,7 @@ function openBurgerMenuSearch(){//etwas ändern damit versch. Sprachen angezeigt
         <button id="BurgerMenusearchBtn" class="BurgerMenusearchbutton" onclick="searchBurgerMenu()">Suche</button>
     </div>
     `;
+    searchInBurgerMenu = true;
     loadLanguages();                  
     openOrCloseBurgerMenu();
 }
