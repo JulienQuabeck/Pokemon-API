@@ -12,6 +12,8 @@ let BurgerMenuOpen = false;
 let BurgerMenushown;
 let errorDetected = false;
 let likedPokemon= [];
+let searchInBurgerMenu = false;
+let activSearch;
 //"https://pokeapi.co/api/v2/pokemon/?offset=40&limit=20"
 
 //Fehler Zeile 375 angeblich kann das Bild nicht geladen werden... wird aber trotzdem angezeigt
@@ -132,11 +134,12 @@ function germanphrases(){
     document.getElementById('loadMoreButton').innerHTML ="mehr anzeigen";
     document.getElementById('BurgerMenuOptionLanguage').innerHTML = "Sprache";
     document.getElementById('BurgerMenuOptionSearch').innerHTML = "Suche";
+
     if (errorDetected == true){
         document.getElementById('errorHeadline').innerHTML = "Fehler!";
         document.getElementById('errormessage').innerHTML = 'Das Pokemon konnte nicht gefunden werden!<br><br>Klick an eine beliebige Stelle um das Fenster zu schließen.';
     }
-    if (BurgerMenushown == true){
+    if (searchInBurgerMenu == true && activSearch != true){
         document.getElementById('BurgerMenusearchBtn').innerHTML = "suchen";
         document.getElementById('BurgerMenusearch').placeholder = "Name des Pokemons";
     }
@@ -153,10 +156,11 @@ function englishphrases(){
         document.getElementById('errorHeadline').innerHTML = "ERROR!";
         document.getElementById('errormessage').innerHTML = 'Cound not find the searched Pokemon!<br><br>Click anywhere to close this window.';
     }
-    if (BurgerMenushown == true){
+    if (searchInBurgerMenu == true && activSearch != true){
         document.getElementById('BurgerMenusearchBtn').innerHTML = "search";
         document.getElementById('BurgerMenusearch').placeholder = "name of the Pokemon";
     }
+
 }
 
 function frenchphrases(){
@@ -170,7 +174,7 @@ function frenchphrases(){
         document.getElementById('errorHeadline').innerHTML = "ERREUR!";
         document.getElementById('errormessage').innerHTML = "Impossible de trouver le Pokémon recherché !<br><br>Cliquez n'importe où pour fermer cette fenêtre.";
     }
-    if (BurgerMenushown == true){
+    if (searchInBurgerMenu == true && activSearch != true){
         document.getElementById('BurgerMenusearchBtn').innerHTML = "rechercher";
         document.getElementById('BurgerMenusearch').placeholder = "Nom du Pokémon";
     }
@@ -470,6 +474,7 @@ function openCard(i){
     loadBackgroundColor(i);
     createAbout(i);
     loadHeartsOfLikesPokemon(i);
+    activSearch = false;
     event.stopPropagation();
 }
 
@@ -649,9 +654,23 @@ function searchForPokemon(search, Pokemonfound){
     document.getElementById('search').value = '';
 }
 
+function searchBurgerMenu(){
+    searchInBurgerMenu = true;
+    activSearch = true;
+    BurgerMenuSearch();
+}
+
+function BurgerMenuSearch(){
+    let search = document.getElementById('BurgerMenusearch').value;
+    let Pokemonfound = false;
+    search = search.toLowerCase();
+    searchForPokemon(search, Pokemonfound);
+}
+
 function search(){
     let search = document.getElementById('search').value;
     let Pokemonfound = false;
+    activSearch = true;
     search = search.toLowerCase();
     searchForPokemon(search, Pokemonfound);
 }
@@ -714,15 +733,15 @@ function openBurgerMenuLanguage(){
     openOrCloseBurgerMenu();
 }
 
-function openBurgerMenuSearch(){
+function openBurgerMenuSearch(){//etwas ändern damit versch. Sprachen angezeigt werden
     document.getElementById('background').classList.remove('d-none');
     document.getElementById('background').innerHTML = '';
     document.getElementById('background').innerHTML += `
     <div id="BurgerMenuChooseSearchContainer" class="BurgerMenuChooseSearchContainer">
         <input type="text" id="BurgerMenusearch" class="BurgerMenusearch" placeholder="name of Pokemon" onclick="event.stopPropagation()">
-        <button id="BurgerMenusearchBtn" class="BurgerMenusearchbutton" onclick="search()">Suche</button>
+        <button id="BurgerMenusearchBtn" class="BurgerMenusearchbutton" onclick="searchBurgerMenu()">Suche</button>
     </div>
     `;
-    openOrCloseBurgerMenu();
     loadLanguages();                  
+    openOrCloseBurgerMenu();
 }
