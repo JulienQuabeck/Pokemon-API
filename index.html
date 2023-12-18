@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon</title>
+    <link rel="icon" href="./img/logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body id="body" onload="init()">
+    <div id="background" class="background d-none" onclick="closeBackground()"></div>
+    <div id="loadingScreen" class="loadingScreen"></div>
+    <header>
+        <div><img src="./img/logo1.png" class="logo"></div>
+        <div><input type="text" id="search" class="search" placeholder="name of Pokemon"><button id="searchBtn" class="searchbutton" onclick="search()">search</button></div>
+        <div>
+            <img id="likedPokemon" class="like" src="./img/liked.png" onclick="openlikedContainer()">
+        </div>
+        <div id="language" class="language" onclick="openAndCloseLanguageDropdown()">Sprache</div>
+        <div id="allLanguages" class="allLanguages d-none">
+            <div onclick="setLanguage(0)">deutsch</div>
+            <div onclick="setLanguage(1)">english</div>
+            <div onclick="setLanguage(2)">français</div>  
+        </div>  
+        <div>
+            <img class="dots d-none"src="./img/dots.png" onclick="openOrCloseBurgerMenu()">
+            <div id="BurgerMenu" class="BurgerMenu d-none">
+                <div id="BurgerMenuOptionLanguage" class="BurgerMenuOption" onclick="openBurgerMenuLanguage()">Sprache</div>
+                <hr>
+                <div id="BurgerMenuOptionSearch" class="BurgerMenuOption" onclick="openBurgerMenuSearch()">Suche</div>
+            </div>
+        </div>
+    </header>
+
+    <div id="singlePokemonCard" class="singlePokemonCard d-none"></div>
+    <div id="overview">
+        
+    </div>
+    <div id="loadmore-button" class="loadMore">
+        <button id="loadMoreButton" class="button" onclick="loadMore()">load more</button>
+    </div>
+</body>
+</html>
