@@ -14,12 +14,17 @@ let errorDetected = false;
 let likedPokemon= [];
 let searchInBurgerMenu = false;
 let activSearch =false;
+
+let allPokemonJsonGer = {};
+let moveInGer = [];
+let movesInGerman = [];
+let movesInEnglish = [];
+let movesInFrensh = [];
 //"https://pokeapi.co/api/v2/pokemon/?offset=40&limit=20"
 
-//Fehler Zeile 375 angeblich kann das Bild nicht geladen werden... wird aber trotzdem angezeigt
 
 // Übersetzung Name in versch. Sprachen
-// responsive: PokemonSingleCard(Chart)
+// Responsive der Chart
 
 async function init(){
     startLoading();
@@ -79,15 +84,6 @@ function setLanguage(i){
     }
     closeBackground();
     initAfterChangingLanguage();
-}
-
-async function loadDataInDifferentLanguages(responseAsJson){
-//     //https://pokeapi.co/api/v2/pokemon/1/forms/0/url
-//     //names -> Namen in verschiedenen Sprachen
-    let newUrl = responseAsJson['forms'][0]['url'];
-    let responseofNewUrl = await fetch(newUrl);
-    let responseAsJsonOfNewUrl = await responseofNewUrl.json();
-    let Test = responseAsJsonOfNewUrl['names'];
 }
 
 function openAndCloseLanguageDropdown(){
@@ -241,12 +237,30 @@ async function renderPokemon(){
         try {
             let responseAsJson = await response.json();
             allPokemon.push(responseAsJson);
-            loadDataInDifferentLanguages(responseAsJson);
+            await loadDataInDifferentLanguages(responseAsJson, i); //nur ein Versuch
         } catch(e) {
-            console.error("error the Pokemon");
+            console.error("error loading the Pokemon");
         }
     }
 }
+
+async function loadDataInDifferentLanguages(responseAsJson, i){
+    //     //https://pokeapi.co/api/v2/pokemon/1/forms/0/url
+    //     //names -> Namen in verschiedenen Sprachen
+        let newmove = responseAsJson['moves'];
+        for (let j = 0; j< newmove.length; j++){ 
+            let move = newmove[j]['move']['url']
+            let fetchedmove = await fetch(move);
+            let responseAsJson = await fetchedmove.json();
+            moveInGer.push(responseAsJson['names'][4]['name']);   
+        }
+        console.log(JSON.stringify(allPokemonJsonGer, null, 2));
+        allPokemonJsonGer = {
+            id: i,
+            attacks: moveInGer
+        };
+        //allPokemonJson hat alle Attacken auf deutsch hinterlegt.
+    }
 
 async function renderMorePokemon(newNoOfPokemon){
     for (let i = noOfPokemon; i <= newNoOfPokemon; i++){
@@ -255,6 +269,7 @@ async function renderMorePokemon(newNoOfPokemon){
         try {
             let responseAsJson = await response.json();
             allPokemon.push(responseAsJson);
+
         } catch(e) {
             console.error("error loading more Pokemon");
         }
@@ -265,6 +280,7 @@ async function renderMorePokemon(newNoOfPokemon){
 function loadMore(){
     let ArrayLength = VarForGettingAmountOfPokemon[0]['count'];
     let newNoOfPokemon = noOfPokemon + 20;
+    startLoadingAgain(newNoOfPokemon, noOfPokemon);
     if (newNoOfPokemon <= ArrayLength){
     newNoOfPokemon = noOfPokemon + 20;
     }else{
@@ -275,7 +291,7 @@ function loadMore(){
 }
 
 async function loadPokemon(){//hier Sprache einfügen
-    startLoadingAgain();//evtl. wieder löschen
+    // startLoadingAgain();//evtl. wieder löschen
     document.getElementById('overview').innerHTML = '';
     for (let i = 0 ; i < allPokemon.length; i++){
         let image = allPokemon[i]['sprites']['other']['dream_world']['front_default'];
@@ -735,7 +751,7 @@ function openBurgerMenuLanguage(){
     openOrCloseBurgerMenu();
 }
 
-function openBurgerMenuSearch(){//etwas ändern damit versch. Sprachen angezeigt werden
+function openBurgerMenuSearch(){
     document.getElementById('background').classList.remove('d-none');
     document.getElementById('background').innerHTML = '';
     document.getElementById('background').innerHTML += `

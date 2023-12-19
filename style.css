@@ -637,3 +637,11 @@ header{
         width:200px;
     }
 }
+
+.loadingScreenText{
+    color:white;
+    position:absolute;
+    bottom:200px;
+    left:40%;
+    font-size:26px;
+}
