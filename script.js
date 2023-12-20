@@ -15,17 +15,6 @@ let likedPokemon= [];
 let searchInBurgerMenu = false;
 let activSearch =false;
 
-let allPokemonJsonGer = {};
-let moveInGer = [];
-let movesInGerman = [];
-let movesInEnglish = [];
-let movesInFrensh = [];
-//"https://pokeapi.co/api/v2/pokemon/?offset=40&limit=20"
-
-
-// Übersetzung Name in versch. Sprachen
-// Responsive der Chart
-
 async function init(){
     startLoading();
     screenwidth();
@@ -102,8 +91,6 @@ function openDropdown(){
     languageDropdownOpened = true;
     document.getElementById('background').classList.remove('d-none');
     document.getElementById('allLanguages').classList.remove('d-none');
-    document.getElementById('language').classList.add('languageclicked'); 
-    document.getElementById('language').classList.add('z-index');
 }
 
 function closeDropDown(){
@@ -236,31 +223,13 @@ async function renderPokemon(){
         let response = await fetch(urlForAllPokemon);
         try {
             let responseAsJson = await response.json();
+            DataForDifferentLanguages = responseAsJson;
             allPokemon.push(responseAsJson);
-            await loadDataInDifferentLanguages(responseAsJson, i); //nur ein Versuch
         } catch(e) {
             console.error("error loading the Pokemon");
         }
     }
 }
-
-async function loadDataInDifferentLanguages(responseAsJson, i){
-    //     //https://pokeapi.co/api/v2/pokemon/1/forms/0/url
-    //     //names -> Namen in verschiedenen Sprachen
-        let newmove = responseAsJson['moves'];
-        for (let j = 0; j< newmove.length; j++){ 
-            let move = newmove[j]['move']['url']
-            let fetchedmove = await fetch(move);
-            let responseAsJson = await fetchedmove.json();
-            moveInGer.push(responseAsJson['names'][4]['name']);   
-        }
-        console.log(JSON.stringify(allPokemonJsonGer, null, 2));
-        allPokemonJsonGer = {
-            id: i,
-            attacks: moveInGer
-        };
-        //allPokemonJson hat alle Attacken auf deutsch hinterlegt.
-    }
 
 async function renderMorePokemon(newNoOfPokemon){
     for (let i = noOfPokemon; i <= newNoOfPokemon; i++){
@@ -290,7 +259,7 @@ function loadMore(){
     noOfPokemon += 21;
 }
 
-async function loadPokemon(){//hier Sprache einfügen
+async function loadPokemon(){
     // startLoadingAgain();//evtl. wieder löschen
     document.getElementById('overview').innerHTML = '';
     for (let i = 0 ; i < allPokemon.length; i++){
@@ -303,7 +272,7 @@ async function loadPokemon(){//hier Sprache einfügen
     finishedLoading();//evtl. wieder löschen
 }
 
-function creatPokemonCard(i, image){ // hier Sprache einfügen
+function creatPokemonCard(i, image){
     document.getElementById('overview').innerHTML += `
     <div id="pokemon${i}" class="pokemon_card" onclick="openCard(${i})">
         <div id="name" class="pokemon_card_name">
@@ -358,7 +327,6 @@ function element(type, i, j){
 }
 
 function safeLocalStorage(i){
-
     let PokemonAsJSON = JSON.stringify(likedPokemon);
     localStorage.setItem('likedPokemon',PokemonAsJSON);
 }
@@ -388,6 +356,7 @@ function openlikedContainer(){
     screen.innerHTML = '';
     screen.innerHTML =`
     <div id="likedPokemonContainer" class="singlePokemonCard likedPokemonContainer">
+    <div class="likePokemonPlaceholderText">no Pokemon marked as Favorit!<div>
     </div>
     `;
     loadLocalStorageForLikedPokemon();
@@ -400,6 +369,7 @@ if(likedPokemon.length == 0){
 }else {
     for (let i = 0; likedPokemon.length; i++){
         let image = allPokemon[likedPokemon[i]]['sprites']['other']['dream_world']['front_default'];
+        document.getElementById('likedPokemonContainer').innerHTML = '';
         document.getElementById('likedPokemonContainer').innerHTML += `
         <div id="pokemon_card_fav${likedPokemon[i]}" class="pokemon_card_fav">
             <div id="pokemon${likedPokemon[i]}" class="pokemon_card" onclick="openCardFromFav(${likedPokemon[i]})">
@@ -500,11 +470,11 @@ function openSinglePokemonCard(){
     document.getElementById('language').classList.remove('z-index');
 }
 
-function openBackground(i){
+function openBackground(i){//Pfeile einfügen
     document.getElementById('background').innerHTML = '';
     document.getElementById('background').innerHTML +=`
-    <div id="left" class="left" onclick="previousPokemon(${i})">previous</div>
-    <div id="right" class="right" onclick="nextPokemon(${i})">next</div>
+    <div id="left" class="left positionBottom" onclick="previousPokemon(${i})"><img class="nextPreviousImage" src="./img/previous.png"></div>
+    <div id="right" class="right positionBottom" onclick="nextPokemon(${i})"><img class="nextPreviousImage" src="./img/next.png"></div>
     `;
     document.getElementById('background').classList.remove('d-none');
     openSinglePokemonCard();

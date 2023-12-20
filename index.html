@@ -16,38 +16,43 @@
 </head>
 
 <body id="body" onload="init()">
-    <div id="background" class="background d-none" onclick="closeBackground()"></div>
-    <div id="loadingScreen" class="loadingScreen">
-        Test
-    </div>
-    <header>
-        <div><img src="./img/logo1.png" class="logo"></div>
-        <div><input type="text" id="search" class="search" placeholder="name of Pokemon"><button id="searchBtn" class="searchbutton" onclick="search()">search</button></div>
-        <div>
-            <img id="likedPokemon" class="like" src="./img/liked.png" onclick="openlikedContainer()">
+    <div class="content">
+        <div id="background" class="background d-none" onclick="closeBackground()"></div>
+        <div id="loadingScreen" class="loadingScreen">
+            Test
         </div>
-        <div id="language" class="language" onclick="openAndCloseLanguageDropdown()">Sprache</div>
-        <div id="allLanguages" class="allLanguages d-none">
-            <div onclick="setLanguage(0)">deutsch</div>
-            <div onclick="setLanguage(1)">english</div>
-            <div onclick="setLanguage(2)">français</div>  
-        </div>  
-        <div>
-            <img class="dots d-none"src="./img/dots.png" onclick="openOrCloseBurgerMenu()">
-            <div id="BurgerMenu" class="BurgerMenu d-none">
-                <div id="BurgerMenuOptionLanguage" class="BurgerMenuOption" onclick="openBurgerMenuLanguage()">Sprache</div>
-                <hr>
-                <div id="BurgerMenuOptionSearch" class="BurgerMenuOption" onclick="openBurgerMenuSearch()">Suche</div>
+        <header>
+            <div><img src="./img/logo1.png" class="logo"></div>
+            <div><input type="text" id="search" class="search" placeholder="name of Pokemon"><button id="searchBtn" class="searchbutton" onclick="search()">search</button></div>
+           
+            <div>
+                <img class="dots d-none"src="./img/dots.png" onclick="openOrCloseBurgerMenu()">
+                <div id="BurgerMenu" class="BurgerMenu d-none">
+                    <div id="BurgerMenuOptionLanguage" class="BurgerMenuOption" onclick="openBurgerMenuLanguage()">Sprache</div>
+                    <hr>
+                    <div id="BurgerMenuOptionSearch" class="BurgerMenuOption" onclick="openBurgerMenuSearch()">Suche</div>
+                </div>
             </div>
-        </div>
-    </header>
+            <div>
+                <div class="likesContainer" onclick="openlikedContainer()">
+                    <img id="likedPokemon" class="like" src="./img/liked.png"> Likes <img id="likedPokemon" class="like" src="./img/liked.png">
+                </div>
+            </div>
+            <div id="language" class="language" onclick="openAndCloseLanguageDropdown()">Sprache</div>
+            <div id="allLanguages" class="allLanguages d-none">
+                <div onclick="setLanguage(0)">deutsch</div>
+                <div onclick="setLanguage(1)">english</div>
+                <div onclick="setLanguage(2)">français</div>  
+            </div>  
+        </header>
 
-    <div id="singlePokemonCard" class="singlePokemonCard d-none"></div>
-    <div id="overview">
-        
-    </div>
-    <div id="loadmore-button" class="loadMore">
-        <button id="loadMoreButton" class="button" onclick="loadMore()">load more</button>
+        <div id="singlePokemonCard" class="singlePokemonCard d-none"></div>
+        <div id="overview">
+            
+        </div>
+        <div id="loadmore-button" class="loadMore">
+            <button id="loadMoreButton" class="button" onclick="loadMore()">load more</button>
+        </div>
     </div>
 </body>
 </html>
