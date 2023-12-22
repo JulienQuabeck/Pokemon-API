@@ -27,14 +27,15 @@ function openlikedContainer(){
     <div class="likePokemonPlaceholderText">no Pokemon marked as Favorit!<div>
     </div>
     `;
+    if(likedPokemon.length == 0){
+    }else{
     loadLocalStorageForLikedPokemon();
     loadLikedPokemonContainerContent();
+    }
 }
 
 function loadLikedPokemonContainerContent(){
     document.getElementById('likedPokemonContainer').innerHTML = '';
-    if(likedPokemon.length == 0){
-    }else {
         for (let i = 0; likedPokemon.length; i++){
             let image = allPokemon[likedPokemon[i]]['sprites']['other']['dream_world']['front_default'];
             document.getElementById('likedPokemonContainer').innerHTML += `
@@ -59,7 +60,6 @@ function loadLikedPokemonContainerContent(){
                 `;
             }
         }
-}
 
 function createsinglePokemonCardContent(input, image, name, i){
     input.innerHTML = '';

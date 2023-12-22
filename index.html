@@ -34,6 +34,7 @@
                     <div id="BurgerMenuOptionLanguage" class="BurgerMenuOption" onclick="openBurgerMenuLanguage()">Sprache</div>
                     <hr>
                     <div id="BurgerMenuOptionSearch" class="BurgerMenuOption" onclick="openBurgerMenuSearch()">Suche</div>
+                    <hr>
                     <div id="BurgerMenuLikes" class="BurgerMenuOption" onclick="openlikedContainer()">Likes</div>
                 </div>
             </div>
@@ -43,13 +44,14 @@
                 </div>
             </div>
             <div id="language" class="language" onclick="openAndCloseLanguageDropdown()">Sprache</div>
-            <div id="allLanguages" class="allLanguages d-none">
-                <div onclick="setLanguage(0)">deutsch</div>
-                <div onclick="setLanguage(1)">english</div>
-                <div onclick="setLanguage(2)">français</div>  
-            </div>  
         </header>
-
+        <div id="allLanguages" class="allLanguages d-none">
+            <div onclick="setLanguage(0)">deutsch</div>
+            <hr>
+            <div onclick="setLanguage(1)">english</div>
+            <hr>
+            <div onclick="setLanguage(2)">français</div>  
+        </div>  
         <div id="singlePokemonCard" class="singlePokemonCard d-none"></div>
         <div id="overview">
             

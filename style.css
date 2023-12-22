@@ -255,6 +255,10 @@ header{
     height:30px; 
 }
 
+.like:hover{
+    cursor:pointer;
+}
+
 .likesContainer{
     font-size:20px;
 }
@@ -435,7 +439,7 @@ header{
 .allLanguages{
     position:absolute;
     top:400px;
-    height:100px;
+    height:130px;
     right:40%;
     left:40%;
     width:20%;
@@ -444,7 +448,7 @@ header{
     color:black;
     border:1px solid black;
     background-color:rgba(240,240,240,1);
-    z-index:9999;
+    z-index:999;
 }
 
 .allLanguages div{

@@ -14,15 +14,9 @@ let searchInBurgerMenu = false;
 let activSearch =false;
 
 async function init(){
-    startLoading();
-    screenwidth();
     await renderPokemon();
-    loadPokemon();
-    fetchAPILength();
-    loadLanguages();
-    showLanguage();
-    loadLocalStorageForLikedPokemon();
-    finishedLoading();
+    initAfterChangingLanguage();
+    screenwidth();
 }
 
 function startLoading(){
@@ -50,24 +44,17 @@ function screenwidth(){
     }
 }
 
-function showLanguage(){
-    if (currentLanguage == 'de'){
-        document.getElementById('language').innerHTML = "deutsch";
-    }else if(currentLanguage == 'en'){
-        document.getElementById('language').innerHTML = "english";
-    }else if(currentLanguage == "fr"){
-        document.getElementById('language').innerHTML = "français";
-    }
-}
-
 function setLanguage(i){
     searchInBurgerMenu = false;
     if (i == 0){
         currentLanguage = 'de';
+        document.getElementById('language').innerHTML = "deutsch";
     }else if(i == 1){
         currentLanguage = 'en';
+        document.getElementById('language').innerHTML = "english";
     }else if(i == 2){
         currentLanguage = 'fr';
+        document.getElementById('language').innerHTML = "français";
     }
     closeBackground();
     initAfterChangingLanguage();
@@ -85,14 +72,14 @@ function openAndCloseLanguageDropdown(){
     }
 }
 
-function openDropdownBackground(){
+function openDropdownBackground(){ 
     document.getElementById('background').classList.toggle('d-none');
 }
 
 function openDropdown(){
     languageDropdownOpened = true;
     openDropdownBackground();
-    document.getElementById('allLanguages').classList.remove('d-none');
+    document.getElementById('allLanguages').classList.toggle('d-none');
 }
 
 function closeDropDown(){
@@ -103,7 +90,7 @@ function closeDropDown(){
     document.getElementById('language').classList.remove('z-index');
 }
 
-function loadLanguages(weight, height){//anpassen
+function loadLanguages(weight, height){//anpassen!!!
     if(currentLanguage == 'de'){
         german(weight, height);
     }else if(currentLanguage == 'en'){
@@ -214,7 +201,6 @@ function initAfterChangingLanguage(){
     loadPokemon();
     fetchAPILength();
     loadLanguages();
-    showLanguage();
     loadLocalStorageForLikedPokemon();
     finishedLoading();
 }
@@ -390,6 +376,7 @@ function closeLanguageWindow(){
     document.getElementById('background').classList.add('d-none');
     document.getElementById('allLanguages').classList.add('d-none');
     document.getElementById('language').classList.remove('languageclicked');
+    languageDropdownOpened = false;
 }
 
 function removeAllLiLines(){
