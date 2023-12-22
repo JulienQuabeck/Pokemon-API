@@ -6,6 +6,23 @@ body{
     scroll-behavior: smooth;
 }
 
+/* width */
+::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 10px;
+  }
+
 .content{
     margin:auto;
     max-width:1920px;
@@ -47,9 +64,10 @@ body{
 
 .background{
     position:fixed;
+    left:0;
     max-width:1990px;
     height:100%;
-    width:100%;
+    min-width:100vw;
     z-index:900;
     background-color:rgba(0,0,0,0.9);
 }
@@ -58,9 +76,18 @@ body{
     cursor:pointer;
 }
 
+.headerbackground{
+    position:absolute;
+    left:0;
+    right:0;
+    min-width:94vw;
+    height:108px;
+    background-color:rgba(211,211,211,0.7);
+}
+
 header{
     height:100px;
-    background-color:rgba(211,211,211,0.7);
+
     display:flex;
     justify-content: space-around;
     align-items:center;
@@ -70,6 +97,7 @@ header{
     right:0;
     left:0;
     border-bottom:1px solid black;
+    z-index:1;
 }
 
 .logo{
@@ -81,9 +109,6 @@ header{
     height:30px;
     border-radius:20px;
     margin-right:8px;
-}
-
-::placeholder{
     padding-left:10px;
 }
 
@@ -96,7 +121,7 @@ header{
 }
 
 
-.button:hover{
+.button, .searchbutton:hover{
     cursor:pointer;
 }
 
@@ -203,11 +228,11 @@ header{
 }
 
 .singlePokemonCard{
-    position: absolute;
+    position: fixed;
     box-sizing: border-box;
     height: 70%;
     width: 40%;
-    z-index: 9999;
+    z-index: 999;
     /* margin: 10% 3% 20% 30%; */
     background-color: rgba(211,211,211,0.9);
     border-radius: 20px;
@@ -245,10 +270,8 @@ header{
 
 .likedPokemonContainer{
     display:flex;
-    /* flex-wrap:wrap; */
-    width:85% !important;
-    height:90% !important;
-    margin: 5% !important;
+    flex-wrap:wrap;
+    overflow-y:scroll;
 }
 
 .pokemon_card_fav{
@@ -373,18 +396,20 @@ header{
 
 .right{
     position:absolute;
-    top:50%;
-    right:50px;
+    top:35%;
+    right:20px;
     color:white;
-    z-index:950;
 }
 
 .left{
     position:absolute;
-    top:50%;
-    left:50px;
+    top:35%;
+    left:20px;
     color:white;
-    z-index:950;
+}
+
+.left, .right:hover{
+    cursor:pointer;
 }
 
 .language{
@@ -393,11 +418,10 @@ header{
     border:1px solid black;
     background-color:rgba(240,240,240,1);
     text-align:center;
-    /* z-index:9999; */
 }
 
 .z-index{
-    z-index:9999;
+    z-index:999;
 }
 
 .languageclicked{
@@ -433,6 +457,9 @@ header{
 }
 
 .dots{
+    position:absolute;
+    top:35px;
+    right:70px;
     width:50px;
 }
 
@@ -524,21 +551,61 @@ header{
 .chartContainer{
     position: relative;
     box-sizing:border-box;
-    height:100%;
-    width:100%;
-    min-width:300px;
-}
-.nextPreviousImage{
-    width:100px;
+    height:90%;
+    width:90%;
 }
 
-.positionBottom{
-    top:80%;
+.chart{
+    box-sizing:border-box;
+    width:100%;
+    height:90%;
+    max-height:350px;
+}
+
+.nextPreviousImage{
+    width:50px;
+}
+
+.loadingScreenText{
+    color:white;
+    position:absolute;
+    bottom:200px;
+    left:40%;
+    font-size:26px;
 }
 
 @media(max-width:1000px){
     .loadingScreenPokeball{
         width:600px;
+    }
+}
+
+@media(max-width:940px){
+    .searchbutton{
+        width:120px;
+    }
+}
+
+@media(max-width:665px){
+    .search{
+        width:150px;
+    }
+}
+
+@media(max-width:570px){
+    .search{
+        width:150px;
+    }
+    .searchbutton{
+        width:80px;
+    }
+
+    .like{
+        height:20px;
+    }
+
+    .likesContainer{
+        font-size:16px;
     }
 }
 
@@ -557,10 +624,6 @@ header{
         width:100px;
     }
 
-    .searchbutton{
-        width:180px;
-    }
-
     .singlePokemonCard{
         width:60%;
         left:20%;
@@ -577,12 +640,13 @@ header{
     .loadingScreenPokeball{
         width:400px;
     }
-}
 
-@media(max-width:660px){
     .search{
         width:150px;
     }
+}
+
+@media(max-width:660px){
 
     .searchbutton{
         width:100px;
@@ -634,19 +698,20 @@ header{
     }
 }
 
-@media(min-width:500px){
+@media(min-width:575px){
     .dots, .BurgerMenu{
         display:none;
     }
 }
 
-@media(max-width:500px){
-    .search, .language, .searchbutton{
+@media(max-width:575px){
+    .search, .language, .searchbutton, .likesContainer{
         display:none;
     }
 
     .dots{
         display:block;
+        right:50px;
     }
 
     .singlePokemonCard{
@@ -661,6 +726,10 @@ header{
 }
 
 @media(max-width:420px){
+    .singlePokemonCardNameContainer b{
+        font-size:20px;
+    }
+
     .errorWindow{
         width:300px;
     }
@@ -670,14 +739,238 @@ header{
     }
 
     .nextPreviousImage{
-        width:80px;
+        width:30px;
+    }
+    .headerbackground{
+        width:50vw;
     }
 }
 
-.loadingScreenText{
-    color:white;
-    position:absolute;
-    bottom:200px;
-    left:40%;
-    font-size:26px;
+@media(max-height:1200px){
+    .right{
+        top:40%;
+    }
+    
+    .left{
+        top:40%;
+    }
+}
+
+@media(max-height:1090px){
+    .right{
+        top:45%;
+    }
+    
+    .left{
+        top:45%;
+    }
+}
+
+@media(max-height:1000px){
+    .right{
+        top:48%;
+    }
+    
+    .left{
+        top:48%;
+    }
+}
+
+@media(max-height:1000px){
+    .singlePokemonCard{
+        height:400px;
+        top:50px;
+    }
+ 
+    .singlePokemonCardContent{
+        height:400px;
+    }
+
+    .upperpartSinglePokemonCardContent{
+        height:400px;
+    }
+
+    .lowerPartSinglePokemonCardContent{
+        height:400px;
+    }
+}
+
+
+@media(max-height:1090px){
+    .right{
+        top:80%;
+    }
+    
+    .left{
+        top:80%;
+    }
+    .singlePokemonContentScollbar {
+        height: 300px;
+    }
+}
+
+
+@media(max-height:850px){
+    .singlePokemonCard{
+        top:20px;
+    }
+
+    .singlePokemonCardContent{
+        height:300px;
+    }
+
+    .upperpartSinglePokemonCardContent{
+        height:300px;
+    }
+
+    .lowerPartSinglePokemonCardContent{
+        height:300px;
+    }
+
+    .singlePokemonContentScollbar {
+        height: 200px;
+        overflow-y: scroll;
+    }
+
+    .singlePokemonCardImage{
+        margin-top:0;
+        height:200px;
+    }
+
+    .right{
+        top:55%;
+    }
+    
+    .left{
+        top:55%;
+    }
+
+    .nextPreviousImage{
+        width:30px;
+    }
+}
+
+@media(max-height:600px){
+    .singlePokemonCard{
+        top:0px;
+    }
+
+    .singlePokemonCardContent{
+        height:250px;
+    }
+
+    .upperpartSinglePokemonCardContent{
+        height:250px;
+    }
+
+    .lowerPartSinglePokemonCardContent{
+        height:250px;
+    }
+
+    .singlePokemonContentScollbar {
+        height: 150px;
+        overflow-y: scroll;
+    }
+
+    .singlePokemonCardImage{
+        margin-top:0;
+        height:150px;
+    }
+
+    .right{
+        top:48%;
+    }
+    
+    .left{
+        top:48%;
+    }
+
+    .nextPreviousImage{
+        width:30px;
+    }
+}
+
+
+@media(max-height:485px){
+    .singlePokemonCardContent{
+        height:200px;
+    }
+
+    .upperpartSinglePokemonCardContent{
+        height:200px;
+    }
+
+    .lowerPartSinglePokemonCardContent{
+        height:200px;
+    }
+
+    .singlePokemonContentScollbar {
+        height: 100px;
+        overflow-y: scroll;
+    }
+
+    .singlePokemonCardImage{
+        margin-top:0;
+        height:100px;
+    }
+
+    .right{
+        top:35%;
+    }
+    
+    .left{
+        top:35%;
+    }
+
+    .nextPreviousImage{
+        width:30px;
+    }
+}
+
+@media(max-height:435px){
+    .singlePokemonCardNameContainer{
+        margin-top:20px
+    }
+
+    .singlePokemonCard{
+        height:150px;
+    }
+
+    .singlePokemonCardContent{
+        height:170px;
+    }
+
+    .upperpartSinglePokemonCardContent{
+        height:140px;
+    }
+
+    .singlePokemonCardMenuContent{
+        font-size:16px;
+    }
+
+    .lowerPartSinglePokemonCardContent{
+        height:170px;
+    }
+
+    .singlePokemonContentScollbar {
+        height: 70px;
+        overflow-y: scroll;
+    }
+
+    .singlePokemonCardImage{
+        margin-top:0;
+        height:70px;
+    }
+
+    .right{
+        top: 55%;
+    }
+    
+    .left{
+        top:55%;
+    }
+
+    .nextPreviousImage{
+        width:30px;
+    }
 }
