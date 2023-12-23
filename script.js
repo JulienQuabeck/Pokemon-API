@@ -12,6 +12,17 @@ let errorDetected = false;
 let likedPokemon= [];
 let searchInBurgerMenu = false;
 let activSearch =false;
+let variableSuchen;
+let variablePlaceholder;
+let variableLanguage;
+let variableLoadMoreButton;
+let variableInfos;
+let variableStats;
+let variableMoves;
+let variableWeight;
+let variableHeight;
+let variableErrorHeadline;
+let variableErrorMessage;
 
 async function init(){
     await renderPokemon();
@@ -90,100 +101,93 @@ function closeDropDown(){
     document.getElementById('language').classList.remove('z-index');
 }
 
-function loadLanguages(weight, height){//anpassen!!!
+function german(){
+    variableSuchen = "suchen";
+    variablePlaceholder = "Name des Pokemons";
+    variableLanguage = "Sprache";
+    variableLoadMoreButton = "mehr anzeigen";
+    variableInfos = "Infos";
+    variableStats = "Stats";
+    variableMoves = "Attacken";
+    variableWeight = "Gewicht: ";
+    variableHeight = "Größe: ";
+    variableErrorHeadline = "FEHLER";
+    variableErrorMessage = 'Das Pokemon konnte nicht gefunden werden!<br><br>Klick an eine beliebige Stelle um das Fenster zu schließen.';
+}
+
+function english(){
+    variableSuchen = "search";
+    variablePlaceholder = "Name of the Pokemon";
+    variableLanguage = "language";
+    variableLoadMoreButton = "load more";
+    variableInfos = "infos";
+    variableStats = "stats";
+    variableMoves = "moves";
+    variableWeight = "weight: ";
+    variableHeight = "height: ";
+    variableErrorHeadline = "ERROR";
+    variableErrorMessage = 'Cound not find the searched Pokemon!<br><br>Click anywhere to close this window.';
+}
+
+function frensh(){
+    variableSuchen = "rechercher";
+    variablePlaceholder = "Nom du Pokémon";
+    variableLanguage = "Langue";
+    variableLoadMoreButton = "afficher plus";
+    variableInfos = "Info";
+    variableStats = "stats";
+    variableMoves = "Attaques";
+    variableWeight = "Poids: ";
+    variableHeight = "Taille: ";
+    variableErrorHeadline = "ERREUR";
+    variableErrorMessage = "Impossible de trouver le Pokémon recherché !<br><br>Cliquez n'importe où pour fermer cette fenêtre.";
+}
+
+function pasteLanguage(){
+    document.getElementById('searchBtn').innerHTML = variableSuchen;
+    document.getElementById('search').placeholder = variablePlaceholder;
+    document.getElementById('language').innerHTML = variableLanguage;
+    document.getElementById('loadMoreButton').innerHTML = variableLoadMoreButton;
+    document.getElementById('BurgerMenuOptionLanguage').innerHTML = variableLanguage;
+    document.getElementById('BurgerMenuOptionSearch').innerHTML =variableSuchen;
+}
+
+function pasteLangugageInCard(weight, height){
+    if (cardopend == true){
+        document.getElementById('about').innerHTML = variableInfos;
+        document.getElementById('stats').innerHTML = variableStats;
+        document.getElementById('moves').innerHTML = variableMoves;
+        document.getElementById('weight').innerHTML = variableWeight + weight;
+        document.getElementById('height').innerHTML = variableHeight + height;
+    }
+}
+
+function pasteLangugageInErrorWindow(){
+    if (errorDetected == true){
+        document.getElementById('errorHeadline').innerHTML = variableErrorHeadline;
+        document.getElementById('errormessage').innerHTML = variableErrorMessage;
+    }
+}
+
+function pasteLangugageInBurgerMenuSearchField(){
+    if (searchInBurgerMenu == true && activSearch != true){
+        document.getElementById('BurgerMenusearchBtn').innerHTML = variableSuchen;
+        document.getElementById('BurgerMenusearch').placeholder = variablePlaceholder;
+    }
+}
+
+function loadLanguages(weight, height){
     if(currentLanguage == 'de'){
-        german(weight, height);
+        german();
     }else if(currentLanguage == 'en'){
-        english(weight, height);
+        english();
     }else if(currentLanguage == 'fr'){
-        french(weight, height);
+        frensh();
     }
-}
-
-function germanphrases(){//anpassen
-    document.getElementById('searchBtn').innerHTML = "suchen";
-    document.getElementById('search').placeholder = "Name des Pokemons";
-    document.getElementById('language').innerHTML = "Sprache";
-    document.getElementById('loadMoreButton').innerHTML ="mehr anzeigen";
-    document.getElementById('BurgerMenuOptionLanguage').innerHTML = "Sprache";
-    document.getElementById('BurgerMenuOptionSearch').innerHTML = "Suche";
-
-    if (errorDetected == true){
-        document.getElementById('errorHeadline').innerHTML = "Fehler!";
-        document.getElementById('errormessage').innerHTML = 'Das Pokemon konnte nicht gefunden werden!<br><br>Klick an eine beliebige Stelle um das Fenster zu schließen.';
-    }
-    if (searchInBurgerMenu == true && activSearch != true){
-        document.getElementById('BurgerMenusearchBtn').innerHTML = "suchen";
-        document.getElementById('BurgerMenusearch').placeholder = "Name des Pokemons";
-    }
-}
-
-function englishphrases(){//anpassen
-    document.getElementById('searchBtn').innerHTML = "search";
-    document.getElementById('search').placeholder = "name of the Pokemon";
-    document.getElementById('language').innerHTML = "language";
-    document.getElementById('loadMoreButton').innerHTML ="show more";
-    document.getElementById('BurgerMenuOptionLanguage').innerHTML = "language";
-    document.getElementById('BurgerMenuOptionSearch').innerHTML = "search";
-    if (errorDetected == true){
-        document.getElementById('errorHeadline').innerHTML = "ERROR!";
-        document.getElementById('errormessage').innerHTML = 'Cound not find the searched Pokemon!<br><br>Click anywhere to close this window.';
-    }
-    if (searchInBurgerMenu == true && activSearch != true){
-        document.getElementById('BurgerMenusearchBtn').innerHTML = "search";
-        document.getElementById('BurgerMenusearch').placeholder = "name of the Pokemon";
-    }
-
-}
-
-function frenchphrases(){//anpassen
-    document.getElementById('searchBtn').innerHTML = "rechercher";
-    document.getElementById('search').placeholder = "Nom du Pokémon";
-    document.getElementById('language').innerHTML = "Langue";
-    document.getElementById('loadMoreButton').innerHTML ="afficher plus";
-    document.getElementById('BurgerMenuOptionLanguage').innerHTML = "Langue";
-    document.getElementById('BurgerMenuOptionSearch').innerHTML = "rechercher";
-    if (errorDetected == true){
-        document.getElementById('errorHeadline').innerHTML = "ERREUR!";
-        document.getElementById('errormessage').innerHTML = "Impossible de trouver le Pokémon recherché !<br><br>Cliquez n'importe où pour fermer cette fenêtre.";
-    }
-    if (searchInBurgerMenu == true && activSearch != true){
-        document.getElementById('BurgerMenusearchBtn').innerHTML = "rechercher";
-        document.getElementById('BurgerMenusearch').placeholder = "Nom du Pokémon";
-    }
-}
-
-function german(weight, height){//anpassen
-    germanphrases();
-    if (cardopend == true){
-        document.getElementById('about').innerHTML ="Infos";
-        document.getElementById('stats').innerHTML ="Werte";
-        document.getElementById('moves').innerHTML ="Attacken";
-        document.getElementById('weight').innerHTML =`Gewicht: ${weight}`;
-        document.getElementById('height').innerHTML =`Größe: ${height}`;
-    }
-}
-
-function english(weight, height){//anpassen
-    englishphrases();
-    if (cardopend == true){
-        document.getElementById('about').innerHTML ="About";
-        document.getElementById('stats').innerHTML ="Stats";
-        document.getElementById('moves').innerHTML ="moves";
-        document.getElementById('weight').innerHTML =`weight: ${weight}`;
-        document.getElementById('height').innerHTML =`height: ${height}`;
-    }
-}
-
-function french(weight, height){//anpassen
-    frenchphrases();
-    if (cardopend == true){
-        document.getElementById('about').innerHTML ="Sur";
-        document.getElementById('stats').innerHTML ="Valeurs";
-        document.getElementById('moves').innerHTML ="Attaques";
-        document.getElementById('weight').innerHTML =`Poids: ${weight}`;
-        document.getElementById('height').innerHTML =`hauteur: ${height}`;
-    }
+    pasteLanguage();
+    pasteLangugageInCard(weight, height);
+    pasteLangugageInErrorWindow();
+    pasteLangugageInBurgerMenuSearchField();
 }
 
 async function fetchAPILength(){
@@ -367,6 +371,7 @@ function closeBackground(){
     document.getElementById('background').classList.add('d-none');
     document.getElementById('singlePokemonCard').classList.add('d-none');
     cardopend = false;
+    errorDetected = false;
     if(languageDropdownOpened = true){
         closeLanguageWindow();
     }

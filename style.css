@@ -578,9 +578,19 @@ header{
     font-size:26px;
 }
 
+@media(max-width:1100px){
+    .singlePokemonCardImage{
+        width:200px;
+    }
+}
+
 @media(max-width:1000px){
     .loadingScreenPokeball{
         width:600px;
+    }
+
+    .searchbutton{
+        width:100px;
     }
 }
 
@@ -590,32 +600,15 @@ header{
     }
 }
 
-@media(max-width:665px){
-    .search{
-        width:150px;
-    }
-}
-
-@media(max-width:570px){
-    .search{
-        width:150px;
-    }
-    .searchbutton{
-        width:80px;
-    }
-
-    .like{
-        height:20px;
-    }
-
-    .likesContainer{
-        font-size:16px;
-    }
-}
-
 @media(max-width:900px){
     .loadingScreenPokeball{
         width:500px;
+    }
+}
+
+@media(max-width:665px){
+    .search{
+        width:150px;
     }
 }
 
@@ -632,7 +625,6 @@ header{
         width:60%;
         left:20%;
         right:20%;
-        /* margin: 10% 20% 20% 20%; */
     }
 }
 
@@ -663,6 +655,33 @@ header{
     }
 }
 
+@media(min-width:602px){
+    .dots, .BurgerMenu{
+        display:none;
+    }
+}
+
+@media(max-width:602px){
+    .search, .language, .searchbutton, .likesContainer{
+        display:none;
+    }
+
+    .dots{
+        display:block;
+        right:50px;
+    }
+
+    .singlePokemonCard{
+        width:80%;
+        left:10%;
+        right:10%;
+    }
+
+    .loadingScreenPokeball{
+        width:300px;
+    }
+}
+
 @media(max-width:600px){
     #headline{
         font-size:0.8em;
@@ -674,6 +693,23 @@ header{
 
     .loadingScreenPokeball{
         width:300px;
+    }
+}
+
+@media(max-width:570px){
+    .search{
+        width:150px;
+    }
+    .searchbutton{
+        width:80px;
+    }
+
+    .like{
+        height:20px;
+    }
+
+    .likesContainer{
+        font-size:16px;
     }
 }
 
@@ -699,33 +735,6 @@ header{
     .errorContent{
         width:150px;
         padding-left:8px;
-    }
-}
-
-@media(min-width:575px){
-    .dots, .BurgerMenu{
-        display:none;
-    }
-}
-
-@media(max-width:575px){
-    .search, .language, .searchbutton, .likesContainer{
-        display:none;
-    }
-
-    .dots{
-        display:block;
-        right:50px;
-    }
-
-    .singlePokemonCard{
-        width:80%;
-        left:10%;
-        right:10%;
-    }
-
-    .loadingScreenPokeball{
-        width:300px;
     }
 }
 

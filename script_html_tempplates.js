@@ -59,7 +59,7 @@ function loadLikedPokemonContainerContent(){
             </div>
                 `;
             }
-        }
+}
 
 function createsinglePokemonCardContent(input, image, name, i){
     input.innerHTML = '';
@@ -271,17 +271,27 @@ function searchBurgerMenu(){
 function BurgerMenuSearch(){
     searchInBurgerMenu = true;
     let search = document.getElementById('BurgerMenusearch').value;
+    if(search == ""){
+        creatErrorMessage();
+        event.stopPropagation();
+    }else{
+    document.getElementById('background').innerHTML = "";
     let Pokemonfound = false;
     search = search.toLowerCase();
     searchForPokemon(search, Pokemonfound);
+    }
 }
 
 function search(){
     let search = document.getElementById('search').value;
-    let Pokemonfound = false;
-    activSearch = true;
-    search = search.toLowerCase();
-    searchForPokemon(search, Pokemonfound);
+    if (search == ""){
+        creatErrorMessage();
+    }else{
+        let Pokemonfound = false;
+        activSearch = true;
+        search = search.toLowerCase();
+        searchForPokemon(search, Pokemonfound);
+    }
 }
 
 function loadBackgroundColor(i){
